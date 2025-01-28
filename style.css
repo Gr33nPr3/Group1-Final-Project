@@ -64,7 +64,7 @@ img
   padding: 10px;
   cursor: move;
   background-color: rgba(0,0,0,0);
-  border: none;
+  bo rder: none;
   border-radius: 8px 8px 0 0;
 }
 
@@ -81,6 +81,33 @@ img
   display: inline-block;
   overflow: auto;
 }
+.timer {
+  width: 200px;
+  border: 1px solid black;
+  padding: 10px;
+  position: absolute;
+  background-color: white;
+}
+
+#timerHeader {
+  cursor: move;
+  background-color: #f1f1f1;
+  border-bottom: 1px solid #ddd;
+  padding: 5px;
+}
+
+#timerDisplay {
+  font-size: 24px;
+  text-align: center;
+  margin: 10px 0;
+}
+
+button {
+  display: block;
+  margin: 5px auto;
+  padding: 5px 10px;
+}
+
 
 .listHeader
 {
