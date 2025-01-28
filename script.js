@@ -96,6 +96,66 @@ function dragElement(elmnt, header)
     }
 }
 
+// Start Timer with Alert to Set Time
+let timerInterval;
+
+document.getElementById("startTimerBtn").addEventListener("click", startTimer);
+document.getElementById("resetTimerBtn").addEventListener("click", resetTimer);
+
+function startTimer() {
+    let timerDisplay = document.getElementById("timerDisplay");
+    
+    // Ask user to set time via prompt
+    let timeInput = prompt("Set the time in minutes (e.g., 25 for 25:00)", "25");
+    let minutes = parseInt(timeInput);
+    let seconds = 0;
+
+    // Set the timer display with the user input
+    if (!isNaN(minutes) && minutes > 0) {
+        timerDisplay.innerText = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+    } else {
+        alert("Invalid input, timer set to 25 minutes.");
+        timerDisplay.innerText = "25:00";
+    }
+
+    // Start countdown
+    timerInterval = setInterval(() => {
+        if (seconds === 0) {
+            if (minutes === 0) {
+                clearInterval(timerInterval);
+                alert("Time's up!");
+                hideTimer();  // Hide the timer after it reaches zero
+                return;
+            }
+            minutes--;
+            seconds = 59;
+        } else {
+            seconds--;
+        }
+        timerDisplay.innerText = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+    }, 1000);
+}
+
+// Reset Timer
+function resetTimer() {
+    clearInterval(timerInterval);
+    document.getElementById("timerDisplay").innerText = "25:00";
+}
+
+// Hide the Timer Function
+function hideTimer() {
+    document.getElementById("timerContainer").style.display = "none";  // Hide timer after time's up
+}
+
+// Make the timer draggable
+dragElement(document.getElementById("timerContainer"), document.getElementById("timerHeader"));
+
+// Remove timer if dragged into trashcan
+document.getElementById("trashBtn").addEventListener("click", function() {
+    document.querySelectorAll(".timer").forEach(timer => timer.remove());
+});
+
+
 
 //spawning in notes
 function createNote()
